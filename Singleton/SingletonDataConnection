@@ -1,0 +1,31 @@
+<?php
+
+class SingletonDataConnection
+{
+  private static $connection;
+  private static $dsn = 'mysql:host=localhost;dbname=Oxford';
+  private static  $user = 'root';
+  private static $password ='smudge22';
+
+  private function __construct() {}
+
+  public static final function getInstance()
+  {
+    if(self::$connection === null)
+    {
+      try
+      {
+          self::$connection = new PDO(self::$dsn, self::$user, self::$password);
+      }
+      catch (PDOException $e) {
+          echo 'Connection failed: ' . $e->getMessage();//remove echo
+      }
+    }
+    return self::$connection;
+  }
+
+  public function query($sql) {
+    return self::$connection->query($sql);
+  }
+
+}
