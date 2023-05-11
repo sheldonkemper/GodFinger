@@ -23,7 +23,7 @@ class SingletonDataConnection
     }
     return self::$connection;
   }
-
+//
   public function query($sql) {
     return self::$connection->query($sql);
   }
